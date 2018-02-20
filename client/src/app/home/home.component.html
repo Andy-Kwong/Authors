@@ -1,0 +1,9 @@
+<p>
+  home works!
+</p>
+
+<div *ngFor="let author of authors">
+    <h3>{{author.name}}</h3>
+    <button [routerLink] = "['../edit-partial']" (click) = "sendData(author._id)">Edit</button>
+    <button (click) = "deleteOne(author._id)">Delete</button>
+</div>
