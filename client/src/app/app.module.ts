@@ -11,13 +11,17 @@ import { AddComponent } from './add/add.component';
 import { HttpService } from './http.service';
 import { HomeComponent } from './home/home.component';
 import { EditPartialComponent } from './edit-partial/edit-partial.component';
+import { QuotesComponent } from './quotes/quotes.component';
+import { AddQuoteComponent } from './add-quote/add-quote.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddComponent,
     HomeComponent,
-    EditPartialComponent
+    EditPartialComponent,
+    QuotesComponent,
+    AddQuoteComponent
   ],
   imports: [
     BrowserModule,
