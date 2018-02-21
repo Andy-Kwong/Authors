@@ -7,7 +7,7 @@ import { HttpService } from '../http.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-    authors: any ;
+    authors: any;
 
     constructor(private _httpService: HttpService) { }
 
@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
     }
 
     sendData(authorId) {
-
         this._httpService.editPartial(authorId);
     }
 

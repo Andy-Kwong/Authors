@@ -19,10 +19,10 @@ export class AddComponent implements OnInit {
     submitAuthor() {
         let observable = this._httpService.addAuthor(this.newAuthor);
         observable.subscribe(data => {
-            console.log(data.error.message)
-        }
+            console.log(data);
+        })
 
-        this.newAuthor = {name: ''}
+        this.newAuthor = {name: ''};
     }
 
 }

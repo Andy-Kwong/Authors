@@ -37,4 +37,21 @@ export class HttpService {
         let url = '/authors/' + authorId;
         return this._http.delete(url);
     }
+
+    addQuote(newQuote) {
+        let url = '/quotes/' + this.authorId;
+        return this._http.post(url, newQuote);
+    }
+
+    deleteQuote(quoteIndex) {
+        let authorIndexObj = {index: quoteIndex};
+        let url = '/quotes/' + this.authorId;
+        return this._http.delete(url, authorIndexObj);
+    }
+
+    // Accepts quote index and amount to increment either +1 or -1
+    voteChangeUp(quoteIndex) {
+        let url = '/quotes/' + this.authorId + '/up';
+        return this._http.put(url, quoteIndex)
+    }
 }

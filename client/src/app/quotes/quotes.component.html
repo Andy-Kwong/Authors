@@ -1,3 +1,20 @@
 <p>
   quotes works!
 </p>
+
+<button [routerLink] = "['../add-quote']">Add Quote</button>
+
+<table>
+    <th>Quote</th>
+    <th>Votes</th>
+    <th>Actions available</th>
+        <tr *ngFor = "let quote of oneAuthor.quotes; let i = index">
+            <td>{{ quote.text }}</td>
+            <td>{{ quote.votes }}</td>
+            <td>
+                <button (click) = "vote(i, true)">Vote up</button>
+                <button (click) = "vote(i, false)">Vote down</button>
+                <button (click) = "deleteQuote(i)">delete</button>
+            </td>
+        </tr>
+</table>

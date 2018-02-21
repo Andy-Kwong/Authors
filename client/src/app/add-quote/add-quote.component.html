@@ -1,3 +1,6 @@
 <p>
   add-quote works!
 </p>
+{{ newQuote | json }}
+<input type="text" name = "newQuote.text" [(ngModel)] = "newQuote.text">
+<button (click) = "addQuote()" [routerLink] = "['../quotes']">Add Quote</button>

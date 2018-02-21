@@ -48,7 +48,53 @@ module.exports = function(app) {
         });
     });
 
-    app.delete('/authors/:id', function(req, res){
+    app.post('/quotes/:id', function(req, res) {
+        var newQuote = {text: req.body.text, votes: 0};
+        console.log(newQuote);
+        console.log("posting new quote:", req.body.text);
+        Author.update({_id: req.params.id}, {$push: {quotes: newQuote}}, function(err, results) {
+            if (err) {
+                console.log(err);
+                res.json({error: err});
+            } else {
+                res.json({success: results});
+            }
+        })
+    });
+
+    // Delete specific comment
+    app.delete('/quotes/:id', function(req, res) {
+        var index = req.body.index;
+        Author.update({_id: req.params.id}, )
+    });
+
+    // Change vote count up
+    app.put('/quotes/:id/up', function(req, res) {
+        Author.findById(req.params.id, function(err, _author) {
+            if (err) {
+                console.log(err);
+                res.json({error: err});
+            } else {
+                let _updatedQuotes = _author.quotes;
+                _updatedQuotes[req.body.index].votes += 1;
+                _author.update({quotes: +updatedQuotes}, function(err, results) {
+                    if (err) {
+                        console.log(err);
+                        res.json({error: err});
+                    } else {
+                        res.json({success: results});
+                    }
+                });
+            }
+        });
+    });
+
+    // Change vote count down
+    app.put('/quotes/:id/down', function(req, res) {
+
+    })
+
+    app.delete('/authors/:id', function(req, res) {
         Author.findByIdAndRemove(req.params.id, function(err, results){
             if (err) {
                 console.log(err);
