@@ -44,8 +44,9 @@ export class HttpService {
     }
 
     deleteQuote(quoteIndex) {
+        console.log("Trying to delete quote!")
         let url = '/quotes/' + this.authorId + '/delete';
-        return this._http.delete(url, quoteIndex);
+        return this._http.put(url, quoteIndex);
     }
 
     voteChangeUp(quoteIndex) {

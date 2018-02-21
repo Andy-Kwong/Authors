@@ -103,7 +103,7 @@ module.exports = function(app) {
                 _author.update({quotes: _updatedQuotes}, function(err, results) {
                     if (err) {
                         console.log(err);
-                        resjson({error:err});
+                        res.json({error:err});
                     } else {
                         res.json({success:results});
                     }
@@ -111,6 +111,27 @@ module.exports = function(app) {
             }
         });
     });
+
+    app.put('/quotes/:id/delete', function(req, res) {
+        console.log("Deleting quote", req.body.index)
+        Author.findById(req.params.id, function(err, _author) {
+            if (err) {
+                console.log(err);
+                res.json({error: err});
+            } else {
+                let _updatedQuotes = _author.quotes;
+                _updatedQuotes.splice(req.body.index, 1)
+                _author.update({quotes: _updatedQuotes}, function(err, results) {
+                    if (err) {
+                        console.log(err); 
+                        res.json({error:err});
+                    } else {
+                        res.json({success: results})
+                    }
+                })
+            }
+        })
+    })
 
     app.delete('/authors/:id', function(req, res) {
         Author.findByIdAndRemove(req.params.id, function(err, results){

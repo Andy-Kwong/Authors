@@ -46,6 +46,11 @@ export class QuotesComponent implements OnInit {
     deleteQuote(quoteIndex) {
         let index = { index: quoteIndex }
         console.log("quoteId", index);
+        let observable = this._httpService.deleteQuote(index);
+        observable.subscribe(data => {
+            console.log(data);
+            this.getAuthor();
+        })
     }
 
 }
