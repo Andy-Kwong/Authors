@@ -12,6 +12,7 @@ export class QuotesComponent implements OnInit {
   constructor(private _httpService: HttpService) { }
 
   ngOnInit() {
+      this.oneAuthor = {};
       this.getAuthor();
   }
 
@@ -24,23 +25,27 @@ export class QuotesComponent implements OnInit {
     }
 
     vote(quoteIndex, votedUp) {
+        let index = { index: quoteIndex }
         if (votedUp) {
-            console.log("voted up", quoteIndex);
-            let observable = this._httpService.voteChangeUp(quoteIndex);
+            console.log("voted up on index", quoteIndex);
+            let observable = this._httpService.voteChangeUp(index);
             observable.subscribe(data => {
                 console.log(data)
+                this.getAuthor();
             })
         } else {
-            console.log("voted down", quoteIndex);
-            let observable = this._httpService.voteChange(quoteIndex, -1);
+            console.log("voted down on index", quoteIndex);
+            let observable = this._httpService.voteChangeDown(index);
             observable.subscribe(data => {
                 console.log(data);
+                this.getAuthor();
             })
         }
     }
 
-    deleteQuote(quoteId) {
-        console.log("quoteId", quoteIndex);
+    deleteQuote(quoteIndex) {
+        let index = { index: quoteIndex }
+        console.log("quoteId", index);
     }
 
 }

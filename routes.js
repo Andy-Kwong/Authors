@@ -70,6 +70,7 @@ module.exports = function(app) {
 
     // Change vote count up
     app.put('/quotes/:id/up', function(req, res) {
+        console.log("incrementing votes up!", req.body.index)
         Author.findById(req.params.id, function(err, _author) {
             if (err) {
                 console.log(err);
@@ -77,7 +78,7 @@ module.exports = function(app) {
             } else {
                 let _updatedQuotes = _author.quotes;
                 _updatedQuotes[req.body.index].votes += 1;
-                _author.update({quotes: +updatedQuotes}, function(err, results) {
+                _author.update({quotes: _updatedQuotes}, function(err, results) {
                     if (err) {
                         console.log(err);
                         res.json({error: err});
@@ -91,8 +92,25 @@ module.exports = function(app) {
 
     // Change vote count down
     app.put('/quotes/:id/down', function(req, res) {
-
-    })
+        console.log("incrementing votes down!", req.body.index)
+        Author.findById(req.params.id, function(err, _author) {
+            if (err) {
+                console.log(err);
+                res.json({error: err});
+            } else {
+                let _updatedQuotes = _author.quotes;
+                _updatedQuotes[req.body.index].votes -= 1;
+                _author.update({quotes: _updatedQuotes}, function(err, results) {
+                    if (err) {
+                        console.log(err);
+                        resjson({error:err});
+                    } else {
+                        res.json({success:results});
+                    }
+                });
+            }
+        });
+    });
 
     app.delete('/authors/:id', function(req, res) {
         Author.findByIdAndRemove(req.params.id, function(err, results){
